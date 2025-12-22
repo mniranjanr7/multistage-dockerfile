@@ -9,6 +9,8 @@
     "build": "mkdir -p build && echo 'Build Success' > build/index.html"
   },
   "dependencies": {
-    "express": "^4.22.1"
+    "cross-spawn": "^7.0.5",
+    "express": "^4.22.1",
+    "glob": "^10.5.0"
   }
 }
