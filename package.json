@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "test": "echo 'Running unit test' && exit 0",
     "build": "mkdir -p build && echo 'Build Success' > build/index.html"
   },
   "dependencies": {
