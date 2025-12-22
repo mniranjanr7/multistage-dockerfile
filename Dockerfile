@@ -10,7 +10,7 @@ RUN npm test
 
 # This stage builds npm build 
 FROM test AS builder
-RUN npm build
+RUN npm run build
 
 # Stage 3 #Production build phase
 FROM node:18-alpine AS release
