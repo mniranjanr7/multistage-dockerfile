@@ -37,7 +37,7 @@ jobs:
           ls -lthr
           cat package.json
           npm ls glob cross-spawn
-          rep '"glob"' package-lock.json
+          grep '"glob"' package-lock.json
       # This crashes the pipeline if vulnerabilities are found
       - name: scan the image for vulnurabilities
         uses: aquasecurity/trivy-action@master
