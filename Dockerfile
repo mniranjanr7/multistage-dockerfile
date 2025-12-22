@@ -8,10 +8,15 @@ FROM base AS test
 COPY . .
 RUN npm test
 
+# This stage builds npm build 
+FROM test AS builder
+RUN npm build
+
 # Stage 3 #Production build phase
 FROM node:18-alpine AS release
 WORKDIR /app
 COPY --from=base /app/node_modules  ./node_modules
+COPY --from=builder /app/build ./build
 COPY . .
 EXPOSE 3000
 CMD [ "npm", "start" ]
