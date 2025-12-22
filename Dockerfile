@@ -1,7 +1,7 @@
 FROM node:18-alpine AS base
 WORKDIR /app
 COPY package*.json .
-RUN npm install
+RUN npm ci
 
 # Stage 2 #Testing phase
 FROM base AS test
