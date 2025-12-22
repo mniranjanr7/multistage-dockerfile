@@ -39,6 +39,7 @@ jobs:
       - name: scan the image for vulnurabilities
         uses: aquasecurity/trivy-action@master
         with:
+          scan-type: image
           image-ref: "nodeapp:${{ github.sha }}"
           format: "table"
           exit-code: "1"
