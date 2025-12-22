@@ -30,7 +30,7 @@ jobs:
       # Docker build local image
       - name: Build local image for scanning
         run: |
-          docker build -t 'nodeapp:${{github.sha}}' .
+          docker build --no-cache -t 'nodeapp:${{github.sha}}' .
       - name: List the files and current working directory
         run: |
           pwd
