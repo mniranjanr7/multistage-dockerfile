@@ -1,0 +1,27 @@
+name: Docker Build and Push
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+jobs:
+  build-push-docker-images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v3
+
+      - name: Docker build setup
+        uses: docker/setup-buildx-action
+
+      # This step runs only upto the test stage
+      - name:  Run the unit test 
+        run: |
+          docker build --target test -t myapp:test .
+      # This step runs only if the unit test passes
+      - name: Build and push production image
+        if: success()
+        uses: docker/login-action@v3
+        with:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}

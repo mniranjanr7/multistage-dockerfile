@@ -1,0 +1,13 @@
+{
+  "name": "docker-app",
+  "version": "1.0.0",
+  "description": "My first Docker app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "build": "mkdir -p build && echo 'Build Success' > build/index.html"
+  },
+  "dependencies": {
+    "express": "^4.22.1"
+  }
+}

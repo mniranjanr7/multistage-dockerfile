@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+
+# Build outputs
+dist/
+build/
+out/
+coverage/
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# IDE / editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Cache directories
+.npm/
+.yarn/
+.cache/
+
+# Test artifacts
+.junit/
+.nyc_output/
+
+# Docker-related (usually not committed)
+docker-compose.override.yml
+
+# Optional: local tooling
+*.tgz
