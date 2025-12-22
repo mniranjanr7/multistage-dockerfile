@@ -1,4 +1,4 @@
-name: Docker Build and Push
+name: DockerBuild_Push
 on:
   workflow_dispatch:
   push:
@@ -28,7 +28,7 @@ jobs:
       # Docker build local image
       - name: Build local image for scanning
         run: |
-          docker run -t 'nodeapp:${{git.sha}}'
+          docker run -t 'nodeapp:${{github.sha}}'
       # This crashes the pipeline if vulnerabilities are found
       - name: scan the image for vulnurabilities
         uses: aquasecurity/trivy-action@master
