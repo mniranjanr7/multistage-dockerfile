@@ -4,6 +4,7 @@ node_modules
 README.md
 .npmrc
 Dockerfile
+.trivyignore
 .env
 .gitignore
 # Dependencies from host
