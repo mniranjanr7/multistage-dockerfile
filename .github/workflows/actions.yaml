@@ -10,10 +10,12 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
-
       - name: Docker build setup
         uses: docker/setup-buildx-action@v3
-
+      - name: List the files and current working directory
+        run: |
+          pwd
+          ls -lthr
       # This step runs only upto the test stage
       - name: Run the unit test
         run: |
@@ -28,7 +30,11 @@ jobs:
       # Docker build local image
       - name: Build local image for scanning
         run: |
-          docker run -t 'nodeapp:${{github.sha}}'
+          docker build -t 'nodeapp:${{github.sha}}' .
+      - name: List the files and current working directory
+        run: |
+          pwd
+          ls -lthr
       # This crashes the pipeline if vulnerabilities are found
       - name: scan the image for vulnurabilities
         uses: aquasecurity/trivy-action@master
