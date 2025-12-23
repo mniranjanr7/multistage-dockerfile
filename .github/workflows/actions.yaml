@@ -62,3 +62,6 @@ jobs:
           context: .
           push: true
           tags: ${{secrets.DOCKER_USERNAME}}/nodeapp:${{ github.sha }}
+  Deploy-to-kubernetes:
+    needs: build-push-docker-images
+    uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
