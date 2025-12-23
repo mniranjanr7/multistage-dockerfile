@@ -10,8 +10,10 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
+        
       - name: Docker build setup
         uses: docker/setup-buildx-action@v3
+
       - name: List the files and current working directory
         run: |
           pwd
@@ -20,6 +22,7 @@ jobs:
       - name: Run the unit test
         run: |
           docker build --no-cache --target test -t myapp:test .
+
       # This step runs only if the unit test passes
       - name: Login to DockerHUB
         if: success()
@@ -27,16 +30,19 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
       # Docker build local image
       - name: Build local image for scanning
         run: |
           docker build --no-cache -t 'nodeapp:${{github.sha}}' .
+
       - name: List the files and current working directory
         run: |
           pwd
           ls -lthr
           cat package.json
           grep '"glob"' package-lock.json
+
       # This crashes the pipeline if vulnerabilities are found
       - name: scan the image for vulnurabilities
         uses: aquasecurity/trivy-action@master
@@ -48,3 +54,11 @@ jobs:
           ignore-unfixed: true
           vuln-type: "os,library"
           severity: "CRITICAL,HIGH"
+
+      # Push the image to DockerHub
+      - name: Push image to DockerHub
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tag: ${{secrets.DOCKER_USERNAME}}/nodeapp:${{ github.sha }}
