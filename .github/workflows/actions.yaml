@@ -64,7 +64,6 @@ jobs:
           tags: ${{secrets.DOCKER_USERNAME}}/nodeapp:${{ github.sha }}
   Deploy-to-kubernetes:
     needs: build-push-docker-images
-    environment: dev
     uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
-    # secrets:
-    #   KUBECONFIG_DATA: ${{secrets.KUBECONFIG_DATA}}
+    secrets:
+      KUBECONFIG_DATA: ${{secrets.KUBECONFIG_DATA}}
