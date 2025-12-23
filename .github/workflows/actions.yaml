@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
-        
+
       - name: Docker build setup
         uses: docker/setup-buildx-action@v3
 
@@ -61,4 +61,4 @@ jobs:
         with:
           context: .
           push: true
-          tag: ${{secrets.DOCKER_USERNAME}}/nodeapp:${{ github.sha }}
+          tags: ${{secrets.DOCKER_USERNAME}}/nodeapp:${{ github.sha }}
