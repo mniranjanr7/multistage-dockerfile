@@ -65,5 +65,7 @@ jobs:
   Deploy-to-kubernetes:
     needs: build-push-docker-images
     uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
+    with:
+      image_version: ${{ github.sha }}
     secrets:
-      KUBECONFIG_DATA: ${{secrets.KUBECONFIG_DATA}}
+      KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
