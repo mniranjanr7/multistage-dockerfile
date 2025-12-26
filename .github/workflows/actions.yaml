@@ -65,7 +65,6 @@ jobs:
 
   deploy-to-kubernetes-Dev-env:
     needs: build-push-docker-images
-    runs-on: ubuntu-latest
     environment: Dev
     uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
     with:
@@ -76,7 +75,6 @@ jobs:
 
   deploy-to-kubernetes-test-env:
     needs: deploy-to-kubernetes-Dev-env
-    runs-on: ubuntu-latest
     environment: Test
     uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
     with:
