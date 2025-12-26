@@ -62,8 +62,19 @@ jobs:
           context: .
           push: true
           tags: ${{secrets.DOCKER_USERNAME}}/nodeapp:${{ github.sha }}
-  Deploy-to-kubernetes:
+
+  deploy-to-kubernetes-Dev-env:
     needs: build-push-docker-images
+    environmnet: Dev
+    uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
+    with:
+      image_version: ${{ github.sha }}
+    secrets:
+      KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
+
+  deploy-to-kubernetes-test-env:
+    needs: deploy-to-kubernetes-Dev-env
+    environmnet: Test
     uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
     with:
       image_version: ${{ github.sha }}
