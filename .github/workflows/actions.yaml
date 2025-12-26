@@ -64,14 +64,14 @@ jobs:
           tags: ${{secrets.DOCKER_USERNAME}}/nodeapp:${{ github.sha }}
 
   deploy-to-kubernetes-Dev-env:
-    needs: build-push-docker-images
-    environment: Dev
-    uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
-    with:
-      image_version: ${{ github.sha }}
-      deploy_strategy: "blue"
-    secrets:
-      KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
+  needs: build-push-docker-images
+  environment: Dev
+  uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
+  with:
+    image_version: ${{ github.sha }}
+    deploy_strategy: "blue"
+  secrets:
+    KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
 
   # deploy-to-kubernetes-test-env:
   #   needs: deploy-to-kubernetes-Dev-env
