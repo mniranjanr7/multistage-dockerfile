@@ -69,6 +69,7 @@ jobs:
     uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
     with:
       image_version: ${{ github.sha }}
+      deploy_strategy: "blue"
     secrets:
       KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
 
@@ -78,5 +79,6 @@ jobs:
     uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
     with:
       image_version: ${{ github.sha }}
+      deploy_strategy: "blue"
     secrets:
       KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
