@@ -77,7 +77,6 @@ jobs:
 
   deploy-to-kubernetes-test-env:
     needs: deploy-to-kubernetes-Dev-env
-    environment: test
     uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
     with:
       image_version: ${{ needs.build-push-docker-images.outputs.image_version }}
