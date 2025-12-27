@@ -7,7 +7,7 @@ on:
 jobs:
   build-push-docker-images:
     runs-on: ubuntu-latest
-    outputs: 
+    outputs:
       image_version: ${{ steps.version.outputs.image_version }}
     steps:
       - name: checkout repository
@@ -41,7 +41,7 @@ jobs:
       # Docker build local image
       - name: Build local image for scanning
         run: |
-          docker build --no-cache -t 'nodeapp:${{github.sha}}' .
+          docker build --no-cache -t 'nodeapp:${{ steps.version.outputs.image_version }}' .
 
       - name: List the files and current working directory
         run: |
@@ -85,7 +85,7 @@ jobs:
     uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
     with:
       image_version: ${{ needs.build-push-docker-images.outputs.image_version }}
-      deploy_strategy: "blue"
       environment: test
+      deploy_strategy: "blue"
     secrets:
       KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
