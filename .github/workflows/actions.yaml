@@ -7,6 +7,8 @@ on:
 jobs:
   build-push-docker-images:
     runs-on: ubuntu-latest
+    outputs: 
+      image_version: ${{github.sha}}
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
@@ -68,6 +70,7 @@ jobs:
     uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
     with:
       image_version: ${{ github.sha }}
+      environment: dev
       deploy_strategy: "blue"
     secrets:
       KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
