@@ -8,10 +8,15 @@ jobs:
   build-push-docker-images:
     runs-on: ubuntu-latest
     outputs: 
-      image_version: ${{github.sha}}
+      image_version: ${{ steps.version.outputs.image_version }}
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
+
+      - name: Setup image version outputs
+        id: version
+        run: |
+          echo "image_version=${{github.sha}}" >> "$GITHUB_OUTPUT"
 
       - name: Docker build setup
         uses: docker/setup-buildx-action@v3
