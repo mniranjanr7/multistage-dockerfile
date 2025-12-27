@@ -69,18 +69,19 @@ jobs:
     needs: build-push-docker-images
     uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
     with:
-      image_version: ${{ github.sha }}
+      image_version: ${{ needs.build-push-docker-images.outputs.image_version }}
       environment: dev
       deploy_strategy: "blue"
     secrets:
       KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
 
-  # deploy-to-kubernetes-test-env:
-  #   needs: deploy-to-kubernetes-Dev-env
-  #   environment: Test
-  #   uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
-  #   with:
-  #     image_version: ${{ github.sha }}
-  #     deploy_strategy: "blue"
-  #   secrets:
-  #     KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
+  deploy-to-kubernetes-test-env:
+    needs: deploy-to-kubernetes-Dev-env
+    environment: test
+    uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
+    with:
+      image_version: ${{ needs.build-push-docker-images.outputs.image_version }}
+      deploy_strategy: "blue"
+      environment: test
+    secrets:
+      KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
