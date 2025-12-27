@@ -70,6 +70,13 @@ jobs:
           push: true
           tags: ${{secrets.DOCKER_USERNAME}}/nodeapp:${{ github.sha }}
 
+  debug-needs-outputs:
+    needs: build-push-docker-images
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Outputs: ${{ toJson(needs.build-push-docker-images.outputs) }}"
+
   deploy-to-kubernetes-Dev-env:
     needs: build-push-docker-images
     uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
