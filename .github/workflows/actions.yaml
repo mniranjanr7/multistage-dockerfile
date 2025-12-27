@@ -88,7 +88,7 @@ jobs:
       KUBECONFIG_DATA: ${{ secrets.KUBECONFIG_DATA }}
 
   deploy-to-kubernetes-test-env:
-    needs: deploy-to-kubernetes-Dev-env
+    needs: [deploy-to-kubernetes-Dev-env, build-push-docker-images]
     uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
     with:
       image_version: ${{ needs.build-push-docker-images.outputs.image_version }}
