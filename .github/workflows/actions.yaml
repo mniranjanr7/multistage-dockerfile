@@ -77,6 +77,7 @@ jobs:
 
   deploy-to-kubernetes-test-env:
     needs: deploy-to-kubernetes-Dev-env
+    runs-on: ubuntu-latest
     environment: test
     uses: mniranjanr7/k8s-deployments/.github/workflows/actions.yaml@main
     with:
